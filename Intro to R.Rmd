@@ -1,0 +1,96 @@
+---
+title: "Intro to R"
+author: "Joshua de la Bruere"
+date: "2/24/2020"
+output: html_document
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+```{r imports, echo=FALSE, message=FALSE}
+
+suppressMessages(library(tidyverse))
+library(DT)
+```
+
+## The Pitch For R
+
+Most commonly, when I'm trying to convince someone to try to learn R, they ask me why? They're already comfortable with excel, and have processes for their reports, and data manipulations. I understand that, when I first started learning R it was for one purpose, to do **Machine Learning** that I couldn't expect Excel to do. I did all of my data exploration, cleaning, and manipulating in Excel, as I as familiar with the interface and knew the shortcuts. 
+
+My pitch for using R more is pretty simple, it let's you do more, faster. Using R you can create reproduceable reports, and functions to enable you to run the report on new data with ease. You can do excel reports that take an hour to calculate in a handful of seconds. 
+
+In Excel, your pipline/process is usually 
+
+* Manual
+* Step by step
+* Involves copying and pasting special values, or formula
+* calculation intesnive
+* Difficult to reverse engineer/Reproduce/Audit
+* Require many steps to explain how it works.
+
+In R your process can be
+
+* Automated
+* Run all steps at once
+* Calculate on entire columns rather than cell by cell
+* Readable
+* Easily Repoduceable
+
+
+### What about VBA?
+
+VBA is a powerful tool that enables automated reports and calculations to reduce manual errors in an Excel report. It's native to Excel and can be used to keep your work entierly in Excel. It is however, difficult to get started with, slower, and not nearly as well documented as R. This is because R is designed for data. R is a statistics language and optimized to work with data, where as VBA is designed to be a basic programing interface. VBA mimics how a human would have to approach the process, where as R can manage the problem in a progmatic manner.
+
+
+To demonstate this, lets take a look at this example problem. You have to calculate if a student is experiencing chronic attendence issues. You want to add a new column where the value is chronic if they have more then 10 attendence issues, with 4 tardies = 1 absense.  Your spreadsheet looks like this. 
+
+```{r, echo=FALSE, message=FALSE}
+attendence_data <- read_csv("Data/attendence_data.csv")
+datatable(attendence_data)
+
+```
+
+```
+Sub addNewColumnCalc()
+
+  Dim LastRow as Long
+  LastRow = .Cells(.Rows.Count, "A").End(xlUp).Row
+  Selection.End(xlToRight).Select
+  Range("F1").Select
+  ActiveCell.FormulasR1C1 = "AttendenceIssues"
+  Range("F2").Select
+  ActiveCell.ForulaR1C1 = "IF((RC[-2]-RC[-1]/4)>=10, ""Chronic"", "Acceptable"")"
+  Selection.FillDown
+  Selection.Copy
+  Selection.pasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlankes:=False, Transpose:=False
+End Sub
+
+```
+
+And in R it could look like: 
+
+```
+attendence_data <- attendence_data %>% 
+  mutate(attendence_issues =  if_else(Absenses + Tardies/4 >= 10, "Chonic", "Acceptable")) 
+```
+
+Which is clearly much simpler. And to me, a lot easier to read. 
+
+
+You can also make much more dynamic plots in R vs Excel, and tweek more options to capture the story that your data has. 
+
+```{r}
+
+attendence_data <- attendence_data %>% 
+  mutate(attendence_issues =  if_else(Absenses + Tardies/4 >= 10, "Chonic", "Acceptable")) 
+
+attendence_data %>%
+  ggplot(aes(x=Absenses, y= Tardies, color=attendence_issues))+
+  geom_point(size=3)+
+  theme_minimal()+
+  theme(legend.position = "top")
+```
+  
