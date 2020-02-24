@@ -8,6 +8,8 @@ runtime: shiny_prerendered
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(learnr)
+tutorial_options(exercise.eval = TRUE)
 
 ```
 ```{r imports, echo=FALSE, message=FALSE}
@@ -107,3 +109,157 @@ I hope by now you're at least a little intriuged about using R to incease your p
 
 
 ## The Basics of R
+
+### The R Console
+
+R like many other programing languages has a *Console* which can be used by the user to exicute various commands. In R Studio, the console is one of the panes you can have open and is open by default. We can also run *Scripts* which are like the console, except they hold multiple commands to be run repeatedly. This tutorial uses the [**learnr** package](https://rstudio.github.io/learnr/) to provide an interface for you to get used to R. This will function as your console. 
+
+```{r, message=FALSE, echo=FALSE}
+message <- "Welcome to R! Get ready for some practice!"
+```
+Give it a try, I've left you a message. To read it, type ```print(message)``` in the following code chunk.
+
+```{r first_code_chunk, exercise=TRUE}
+
+
+
+```
+
+### Basic Calculations
+
+So what can we do in the R console? Much like formulas in excel, we can use R as an overly complicated calcuator. R knows basic arithmatic and you can type a calcuation and r will provide a result. You can ask it what 2+2 is or what 3*10 is and it will get you the answer. 
+
+R undersands 
+
+* Basic arithmatic symbols (`+-*/^`)
+* averageing(`mean(c(x1,x2,x3)), median(c(x1,x2,x3)`)
+* exponents and logs(`log(x, base = exp(1), exp()`) )
+* square roots (`sqrt(x)`)
+
+Note that for averaging, R needs a **Vector** instead of just comma seperated values in excel. A Vector is very easy to create, you just **c** combine comma seperated values into a vector using `c(item_1, item_2, ... item_n)`
+
+Why don't you create a vector of this list, "10, 14, 2, 5, 5, 2, 15, 14, 12, 11, 13" and store it as `first_vector`. We can store values as variables by using the `<-` operator like so.
+
+```{r}
+example_variable <- "A value"
+
+print(example_variable)
+```
+
+
+Now give it a shot. Create a vector named first_vector and set it's values to the ones provided above and find the mean and median.
+
+```{r first_vector, exercise=TRUE}
+first_vector <- c(1)
+
+mean_value <- mean(1)
+median_value <- median(1)
+```
+
+<!-- Run this chunk to see if you have the right values. -->
+<!-- ```{r, message=FALSE, echo=FALSE} -->
+
+<!-- check_vector <- c(10, 14, 2, 5, 5, 2, 15, 14, 12, 11, 13) -->
+
+<!-- mean_value_check <- mean(check_vector) -->
+<!-- median_value_check <- median(check_vector) -->
+
+<!-- ``` -->
+
+
+<!-- ```{r first_vector_check,  exercise=TRUE} -->
+
+
+<!-- if_else(first_vector ==  check_vector, T,F) -->
+
+<!-- if_else(mean_value ==  mean_value_check, T,F) -->
+
+<!-- if_else(median_value ==  median_value_check, T,F) -->
+
+<!-- ``` -->
+
+
+### Basic Calcualtion Exercises
+
+Using the r console, find the answer to the following set of problems. 
+
+
+```{r mathConsole, exersise =TRUE}
+```
+
+```{r math1, echo=FALSE}
+question("What is 8^7 ?", 
+         answer("2097152", correct = TRUE), 
+         answer("5764801"), 
+         answer("8773.065"),
+         answer("56"),
+         allow_retry = TRUE)
+
+```
+```{r math2, echo=FALSE}
+question(sprintf("what is the square root of 4^2 + 5^2 ?"), 
+         answer("96.4987"), 
+         answer("5.671858"), 
+         answer("7.5"),
+         answer("6.403124", correct = TRUE),
+         allow_retry = TRUE)
+
+```
+```{r math3, echo=FALSE}
+question("what is the difference between the medain and mean of the following list of numbers? '1, 5, 3, 10, 21, 4, 15, 24", 
+         answer("96.4987"), 
+         answer("2.875", correct=TRUE), 
+         answer("7.5"),
+         answer(" -2.875"),
+         allow_retry = TRUE)
+
+```
+
+
+### Variables and Assignment
+
+As mentioned above, we can store values with a name, This is called a *variable*. This is similar to doing a calculation adn stoing it in a specific cell to reference later. As mentioned before, it's best practice to assign values the variable. Variables can be single values, or data structures with multiple values like vectors.
+
+#### Naming guidelines
+In general, your variable names should be descriptive and clear. There are a few different ways to style your variables, but you should strive to be consistant. The [tidyverse style guide](http://adv-r.had.co.nz/Style.html) reccomends using an underscore to seperate words in a variable name. This is called snake_ _case. [Google's R style guide](https://google.github.io/styleguide/Rguide.html) uses BigCamelCase. It's important to have a consistant convention so that way you can quickly access your variables and make it easier for others to read.
+
+Some limitations on variable names
+
+* Variable names must consist of letters, numbers, the underscore, or periods
+* They can't start with numbers
+* they can't be reserved characters
+  + c q t C D F I T
+* They can't be reserved words
+  + if, else, repeat, while, function, for, in, next, break, TRUE, FALSE, NULL, Inf, NaN, NA, NA_integer_, NA_real_, NA_complex_, NA_character_
+* Variables are case sensitive
+  + var1 and Var1 are different
+  
+#### Vectors 
+Vectors are a list of values that are strung together. We can use these to hold a colection of numerical, or character data. For numeric values we have some built in functions to summerise them. These are very similar to using the formulas in excel to do calcuations over a range.
+
+* `sum(x)` sums the total 
+* `length(x)` gets the number of values in the vectors
+* `mean(x)` finds the mean 
+* `var(x)` calculates the varience of the vector
+* `sd(x)` calculates the standard deviation
+* `max(x)` finds the largest value
+* `min(x)` finds the smallest value
+* `median(x)` finds the median
+* `y = sort(x)` Sorts the values in acending order
+
+values in a list are *indexed* which means you can access a specific value if you need to by using square brackets after the vectors name like in the following code chunk.
+
+```{r}
+my_vector <- c(1,3,6,9,12,15)
+
+print(my_vector[4])
+```
+
+
+## What's The Same
+
+## Tidy Data
+
+## Into the Tidyverse
+
+## What Will Wow
