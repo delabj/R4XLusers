@@ -2,8 +2,8 @@
 title: "Intro to R"
 author: "Joshua de la Bruere"
 date: "2/24/2020"
-output: html_document
-runtime: shiny
+output: learnr::tutorial
+runtime: shiny_prerendered
 ---
 
 ```{r setup, include=FALSE}
@@ -77,13 +77,16 @@ attendence_data <- attendence_data %>%
   mutate(attendence_issues =  if_else(Absenses + Tardies/4 >= 10, "Chonic", "Acceptable")) 
 ```
 
-Which is clearly much simpler. And to me, a lot easier to read. 
+Which is clearly much simpler and easier to read. 
+
+### Better Plots
 
 
-You can also make much more dynamic plots in R vs Excel, and tweek more options to capture the story that your data has. 
+You can also make much more dynamic plots in R vs Excel, and tweek more options to capture the story that your data tells. We'll dive into plotting later, with a focus on the [**ggplot2** package](https://ggplot2.tidyverse.org/)
+
+For example this was a fairly simple plot to make using R, that would take a few minutes of clicking around in excel to produce a similar result. 
 
 ```{r}
-
 attendence_data <- attendence_data %>% 
   mutate(attendence_issues =  if_else(Absenses + Tardies/4 >= 10, "Chonic", "Acceptable")) 
 
@@ -94,3 +97,13 @@ attendence_data %>%
   theme(legend.position = "top")
 ```
   
+  
+  
+### Conclusion
+I hope by now you're at least a little intriuged about using R to incease your productivity and eliminating your frustrations with work. R is more readable, repoducable, and easier to maintain between users than that old .xlsxm file that gets emailed around between all your users. 
+
+
+
+
+
+## The Basics of R
