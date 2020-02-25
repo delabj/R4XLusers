@@ -370,7 +370,7 @@ Vectors are a list of values that are strung together. We can use these to hold 
 
 values in a list are *indexed* which means you can access a specific value if you need to by using square brackets after the vectors name like in the following code chunk.
 
-```{r}
+```{r vector_index}
 my_vector <- c(1,3,6,9,12,15)
 
 print(my_vector[4])
@@ -385,9 +385,65 @@ R's index is numbered similar to how Excel numbers its columns and rows, startin
 
 ### Data Frames
 
-In excel, we store our data in sheets. In R we can store our data in a few different data structures, the one we'll be focusing on today is a *Data Frame*. A data frame is like a table in Excel. Each column has a name much like in excel each column has a header. The Values within a column must share the same type. 
+In excel, we store our data in sheets. In R we can store our data in a few different data structures, the one we'll be focusing on today is a *Data Frame*. A data frame is like a table in Excel. Each column has a name much like in excel each column has a header. The Values within a column must share the same type. So if you have a bunch of numbers and some character in a column, that column will be treated as a character column, as charictar can contain both values, but numeric cannot. 
+
+Data Frames ([and latter tibbles](https://r4ds.had.co.nz/tibbles.html)) are central to maniuplating, analysing, and visualizing your data. When you import data into R from a .xlsx, or .csv file, you will get a resulting data frame. Sometimes however, you'll need to create a new data frame manually. The process for doing so is fairly simple.
+
+A data frame can be thought of as a collection of vectors with the same length. Each vector is like a column in a table where each entry is an observation. We can group a set of vectors into a data frame giving us a table like object. 
 
 
+```{r dataframe_setup, echo = FALSE, messages = FALSE}
+hp <- mtcars$hp
+mpg <- mtcars$mpg
+cyl <- mtcars$cyl
+car <- rownames(mtcars)
 
 
+```
 
+In the code below, create a data frame with the vectors `car_name`, `mpg`, `hp`, and `cyl`, using `data.frame(vector1, vector2)`
+
+```{r manual_data_frame, exercise = TRUE }
+# Create your data frame here
+
+
+```
+
+
+#### Selecting Values
+Notice that data frames are sort of like 2 dimensional vectors, we might want to select a value from our data frame. With vectors, we were able to do this by using the index. We can do that again with data frames, but this time, we have a few different ways to do that. 
+
+
+##### Selecting Columns
+First, we can select a column by calling the name of our data frame and using square brackets and a number, much like how our index of vectors worked. `data_frame[1]` returns the first column. However, it's better practice to call the column using `data_frame[,1]` to be clear that you're selecting the column. You can also select multiple columns this way by using a vector of columns. `data_frame[,c(1,3,5)]` will select the first, 3rd and 5th columns. A minus symbol before your vector will select all but those columns.
+
+You can also slect the column by name using this format. `data_frame$col1` This works well if you know the name of the column you're looking for and you know the position of that column will not change. 
+
+Using the data frame mtcars, select the column wt. It's in the 6th column. Store it as car_weight.
+
+```{r selecting_columns, exercise = TRUE}
+mtcars
+```
+
+##### Selecting Rows
+
+Selecting an entire row is similar to selecting an entire column. You can do it with row numbers by using `data_frame[1,]` or selecting multiple with a vector as in `data_frame[c(1,2,3,4),]`. You can select named rows by using `data_frame["name",]`
+
+Below select the first 6 rows from the Orange data set. 
+
+```{r selecting_rows, exercise = TRUE}
+Orange
+```
+
+
+##### Selecting values
+
+Finally we can combine our other methods to select data in specific cells, by using an exact position, much like how you would in Excel, except columns aren't named with letters by default. You can select specific values using `data_frame[rownum, colnum]` and again, you can select multiple rows and columns by providing a vector. 
+
+To practice, select the courtelary fertility rate, and infant mortality rate from the `swiss` data set packaged with R. 
+
+
+```{r selecting_vales, exercise = TRUE}
+swiss
+
+```
