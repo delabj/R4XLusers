@@ -126,7 +126,7 @@ attendence_data %>%
 ### Conclusion
 I hope by now you're at least a little intriuged about using R to incease your productivity and eliminating your frustrations with work. R is more readable, repoducable, and easier to maintain between users than that old .xlsxm file that gets emailed around between all your users. 
 
-
+## What's The Same
 
 
 
@@ -256,8 +256,107 @@ Some limitations on variable names
 * Variables are case sensitive
   + var1 and Var1 are different
   
-#### Vectors 
-Vectors are a list of values that are strung together. We can use these to hold a colection of numerical, or character data. For numeric values we have some built in functions to summerise them. These are very similar to using the formulas in excel to do calcuations over a range.
+  
+#### Variable Types
+
+In R the type of data in a variable is important. Certain functions can only be used on character data, and certain functions can only be used on numeric data. Knowing the type of data will enable you to make decisions about how to handle the data. 
+
+In Exel, you have number formats. These include things like 
+
+* General
+* Currency
+* Date
+* Time
+* Percentage
+* Text
+
+This is similar to what a variable type is in R. 
+
+In R we have these variable types
+
+* Numerical
+* Integer
+* Character
+* Logical
+* Complex
+* Dates
+
+We won't be covering complex in this tutorial, but it is worth noting that they exsist. These have parelles to how the data is handeled behind the scenes in Excel, and learning about the types allows you to take more control over your data. 
+
+##### Numerical Variables
+
+Numeric Values are values that are any real or decimal number. In general this is what most values with numbers will be. This is close to the general format in Excel. Other formats from Excel that will be handled as numeric include percents, curenecy, number, and scientific.
+
+
+```{r numeric_example, eval = FALSE}
+# Numeric variables
+numeric_1 <- 4.2
+numeric_2 <- 36
+numeric_3 <- 10e5
+```
+
+##### Integer Variables
+
+Much like numeric variables, integer variables are numbers, however they're numbers without any decimal places. You can specify a value as an integer by using a capital L after the number. Non integer numbers that are converted to integers are truncated and lose any value behind the decimal place. In general you probably won't need to use this over a numeric value, but awareness is important.
+
+```{r int_example, eval = FALSE}
+# An Integer
+integer_1 <- 2L
+```
+
+##### Character Variables
+
+Character variables are similar to the plain text Excel formatting. No assumptions are made about the data. Character variables contain text and numbers and can be asigned by listing the value inside quotation marks.
+
+```{r char_example, eval = FALSE}
+# Character Variables
+character_1 <- 'Words Words Words'
+character_2 <- "This is find as well."
+character_3 <- "1"
+
+```
+
+##### Logical Variables
+
+A logcial variable is just like how Excel handled `TRUE` and `FALSE` values in cells. These can only be true or false though R gives some flexability by allowing you to use just `{r}T` or `{r}F` as shorthand.
+
+```{r logical_example, eval = FALSE}
+# Logical Variables
+logical_1 <- T
+logical_2 <- TRUE
+logical_3 <- F
+logical_4 <- FALSE
+```
+
+
+##### Date Variables
+
+R also has a robust way to handel dates. In general R handles dates in a much less intrusive manner [than Excel](http://ecologybits.com/index.php/2016/07/06/beware-this-scary-thing-excel-can-do-to-your-data/) You can force R to handle the dates using the `as.Date(x)` function where you can specify the format.
+
+```{r date_example, eval = FALSE}
+# A date variable
+date_1 <- as.Date('1/15/2001',format='%m/%d/%Y')
+```
+
+
+Speaking of `as.Date(x)` we can use `as.character(x)`, `as.numeric(x)`, `as.integer(x)`, and `as.logical(x)` to force R to store our variable as a given type. This may cause unforseen issues if you're converting something that doesn't naturally flow between the different types, like a sentnse to integer or number to logical. You can learn more about the granular details of the conversion by using `?functionName`. This will pull up documentation on the function, which may contain specific warnings and examples.    
+
+
+We can determine the type of variable that we're working with using the `class()` function. 
+This function will take an object and return the class of it. Use the code chunk below to play around with creating variables and checking their class. 
+
+```{r var_clasS, exercise=TRUE}
+# Create a few variables here
+
+
+# What class are they?
+
+```
+
+
+  
+### Vectors 
+Vectors are a list of values that are strung together. We can use these to hold a colection of numerical, or character data. For numeric values we have some built in functions to summerise them. These are very similar to using the formulas in excel to do calcuations over a range. A vector must contain data of the same type. 
 
 * `sum(x)` sums the total 
 * `length(x)` gets the number of values in the vectors
@@ -286,10 +385,9 @@ R's index is numbered similar to how Excel numbers its columns and rows, startin
 
 ### Data Frames
 
+In excel, we store our data in sheets. In R we can store our data in a few different data structures, the one we'll be focusing on today is a *Data Frame*. A data frame is like a table in Excel. Each column has a name much like in excel each column has a header. The Values within a column must share the same type. 
 
 
-
-## What's The Same
 
 
 
