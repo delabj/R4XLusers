@@ -2,7 +2,10 @@
 title: "Intro to R"
 author: "Joshua de la Bruere"
 date: "2/24/2020"
-output: learnr::tutorial
+output:
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
 runtime: shiny_prerendered
 ---
 
@@ -17,6 +20,27 @@ tutorial_options(exercise.eval = TRUE)
 suppressMessages(library(tidyverse))
 library(DT)
 ```
+## Welcome
+
+This is a tutorial/teaching tool to help those who are used to using Excel for data maniupation to help them get onboard with R. 
+
+### Outline
+
+This tutorial will do the following
+
+* Make a use case for R
+* explain The basics of R
+* explain The Similaritites of R and Excel
+* Introduce the Tidyverse
+* Introduce Tidy Data
+* Show the Wow Factor. 
+
+### Is this tutorial for you?
+
+This tutorial may not be right for you. This tutorial makes some assumptions that you have already have knoweldge of Excel, and know how to/have set up R and R studio. This doesn't assume deep programing background, though it will be helpful.
+
+If you need help installing R [This tutorial](https://learnr-examples.shinyapps.io/ex-setup-r/) may be a little more helpful.
+
 
 ## The Pitch For R
 
@@ -179,7 +203,7 @@ median_value <- median(1)
 <!-- ``` -->
 
 
-### Basic Calcualtion Exercises
+#### Basic Calcualtion Exercises
 
 Using the r console, find the answer to the following set of problems. 
 
@@ -254,6 +278,17 @@ my_vector <- c(1,3,6,9,12,15)
 
 print(my_vector[4])
 ```
+
+Unlike some other programing languages that start indexing at 0 R is similar to how excel numbers it's columns and rows, starting the index at 1. If you need the 5th item in a list, then use the number 5. It's intuitve and will become second nature as you use R more. 
+
+
+#### Vectors and Variables Examples
+
+
+
+
+
+
 
 
 ## What's The Same
