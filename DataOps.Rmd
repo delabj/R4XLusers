@@ -1,0 +1,17 @@
+---
+title: "Data Manipulation And Cleaning"
+author: "Joshua de la Bruere"
+date: "2/25/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+## Tidy Data
+
+## Into the Tidyverse
+
+## Data Manipulations
+
+## Pivot Tables

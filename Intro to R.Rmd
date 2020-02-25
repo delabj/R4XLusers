@@ -22,18 +22,16 @@ library(DT)
 ```
 ## Welcome
 
-This is a tutorial/teaching tool to help those who are used to using Excel for data maniupation to help them get onboard with R. 
+This is a tutorial/teaching tool to help those who are used to using Excel for data maniupation to help them get onboard with R. This is part 1 in a series of 4 tutorials to get help get familiar with R.
 
 ### Outline
 
-This tutorial will do the following
+In this part of the tutorial, we will
 
 * Make a use case for R
 * explain The basics of R
 * explain The Similaritites of R and Excel
-* Introduce the Tidyverse
-* Introduce Tidy Data
-* Show the Wow Factor. 
+
 
 ### Is this tutorial for you?
 
@@ -279,22 +277,19 @@ my_vector <- c(1,3,6,9,12,15)
 print(my_vector[4])
 ```
 
-Unlike some other programing languages that start indexing at 0 R is similar to how excel numbers it's columns and rows, starting the index at 1. If you need the 5th item in a list, then use the number 5. It's intuitve and will become second nature as you use R more. 
+R's index is numbered similar to how Excel numbers its columns and rows, starting the index at 1. If you need the 5th item in a list, then use the number 5. It's intuitve and will become second nature as you use R more. 
 
 
-#### Vectors and Variables Examples
+#### Vectors and Variables Problems
 
 
 
-
+### Data Frames
 
 
 
 
 ## What's The Same
 
-## Tidy Data
 
-## Into the Tidyverse
 
-## What Will Wow
