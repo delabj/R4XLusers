@@ -42,9 +42,9 @@ If you need help installing R [This tutorial](https://learnr-examples.shinyapps.
 
 ## The Pitch For R
 
-Most commonly, when I'm trying to convince someone to try to learn R, they ask me why? They're already comfortable with excel, and have processes for their reports, and data manipulations. I understand that, when I first started learning R it was for one purpose, to do **Machine Learning** that I couldn't expect Excel to do. I did all of my data exploration, cleaning, and manipulating in Excel, as I as familiar with the interface and knew the shortcuts. 
+Most commonly, when I'm trying to convince someone to try to learn R, they ask me why? They're already comfortable with Excel, and have processes for their reports, and data manipulations. I understand that, when I first started learning R it was for one purpose, to do **Machine Learning** that I couldn't expect Excel to do. I did all of my data exploration, cleaning, and manipulating in Excel, as I as familiar with the interface and knew the shortcuts. 
 
-My pitch for using R more is pretty simple, it let's you do more, faster. Using R you can create reproduceable reports, and functions to enable you to run the report on new data with ease. You can do excel reports that take an hour to calculate in a handful of seconds. 
+My pitch for using R more is pretty simple, it let's you do more, faster. Using R you can create reproduceable reports, and functions to enable you to run the report on new data with ease. You can do Excel reports that take an hour to calculate in a handful of seconds. 
 
 In Excel, your pipline/process is usually 
 
@@ -108,7 +108,7 @@ Which is clearly much simpler and easier to read.
 
 You can also make much more dynamic plots in R vs Excel, and tweek more options to capture the story that your data tells. We'll dive into plotting later, with a focus on the [**ggplot2** package](https://ggplot2.tidyverse.org/)
 
-For example this was a fairly simple plot to make using R, that would take a few minutes of clicking around in excel to produce a similar result. 
+For example this was a fairly simple plot to make using R, that would take a few minutes of clicking around in Excel to produce a similar result. 
 
 ```{r}
 attendence_data <- attendence_data %>% 
@@ -128,7 +128,64 @@ I hope by now you're at least a little intriuged about using R to incease your p
 
 ## What's The Same
 
+### Seeing/Feeling Your Data
 
+Thankfully, if you're used to doing data analysis and reporting in Excel, not everything is different when you come to R. There are some obvious differences, like how you'll have to script out what you want R to do to your data. Sometimes the data can feel a little more distant than when you're able to touch the data in a spreadsheet. Your data is stuck in some variable and the table it represents isn't immediately apperent. I used to feel the same way. I would prefer to do my data manipulation in Excel in order to feel the data and get a handle on it. I even did this for my a huge data set for my Capstone, where I had millions of cells in a single spreadsheet. 
+
+Luckily, R can help us see our data using the `view(data)` function.  Take a look at this data set called mtcars
+
+```{r viewing_data, echo=TRUE}
+view(mtcars)
+
+```
+
+### Loading Your Data
+
+This might have you wondering how you can get data into R. If you have a coworker sending you a CSV or XLSX file, you can easily import that into R. You can do this by using the `read_csv` function or the `read_xlsx` functions. In R studio this can be done using the interface instead of using the functions manually. 
+
+
+### Filtering
+
+Without getting too in the weeds about R details yet, we can look at some examples of how we can filter with R. In Excel, this is pretty easy, we can filter with a few buttons. In this tutorial, we'll be using the *Tidyverse* packages, so this example will show you how that function works. Here we'll be filtering to cars that only have at least 6 cylinders.
+
+
+```{r filtering_example}
+mtcars %>%
+  filter(cyl >=6)
+
+```
+
+
+### Sorting
+
+We can arrange our data easily as well, we could use the `sort()` function, or the `arrange()` function for this. Let's use `arrange()`. This is similar to how the `sort()` function in Google Sheets works and how you sort data in your own tables. Let's sort mtcars by mpg, with the highest value first. Note how we use `desc()` around our varialbe name to do things in decending order. 
+
+```{r sorting_example}
+mtcars %>%
+  arrange(desc(mpg))
+
+```
+
+
+### Formulas
+
+We can use formulas on entier columns at once rather than having Excel run cell by cell. We can use these to create new columns. For example, We can create a new column called weight class using the `ifelse()` function. Notice how similar this looks to the `IF()` function in Excel. 
+
+```{r}
+mtcars$weight_class <- ifelse(mtcars$wt >= 4, "Heavy", "Light" )
+
+mtcars
+```
+
+We can also calcualte similarly to the `AVERAGEIF()`, `SUMIF()`, and `COUNTIF` by grouping our data and sumarizing it. Let's group by gear, and cyl, and weight class and find the mean mpg and median mpg. 
+
+```{r}
+mtcars %>%
+  group_by(gear, cyl, weight_class) %>%
+  summarize(mean_mpg = mean(mpg), median_mpg = median(mpg))
+
+
+```
 
 ## The Basics of R
 
@@ -149,7 +206,7 @@ Give it a try, I've left you a message. To read it, type ```print(message)``` in
 
 ### Basic Calculations
 
-So what can we do in the R console? Much like formulas in excel, we can use R as an overly complicated calcuator. R knows basic arithmatic and you can type a calcuation and r will provide a result. You can ask it what 2+2 is or what 3*10 is and it will get you the answer. 
+So what can we do in the R console? Much like formulas in Excel, we can use R as an overly complicated calcuator. R knows basic arithmatic and you can type a calcuation and r will provide a result. You can ask it what 2+2 is or what 3*10 is and it will get you the answer. 
 
 R undersands 
 
@@ -158,7 +215,7 @@ R undersands
 * exponents and logs(`log(x, base = exp(1), exp()`) )
 * square roots (`sqrt(x)`)
 
-Note that for averaging, R needs a **Vector** instead of just comma seperated values in excel. A Vector is very easy to create, you just **c** combine comma seperated values into a vector using `c(item_1, item_2, ... item_n)`
+Note that for averaging, R needs a **Vector** instead of just comma seperated values in Excel. A Vector is very easy to create, you just **c** combine comma seperated values into a vector using `c(item_1, item_2, ... item_n)`
 
 Why don't you create a vector of this list, "10, 14, 2, 5, 5, 2, 15, 14, 12, 11, 13" and store it as `first_vector`. We can store values as variables by using the `<-` operator like so.
 
@@ -331,7 +388,7 @@ logical_4 <- FALSE
 
 ##### Date Variables
 
-R also has a robust way to handel dates. In general R handles dates in a much less intrusive manner [than Excel](http://ecologybits.com/index.php/2016/07/06/beware-this-scary-thing-excel-can-do-to-your-data/) You can force R to handle the dates using the `as.Date(x)` function where you can specify the format.
+R also has a robust way to handel dates. In general R handles dates in a much less intrusive manner [than Excel](http://ecologybits.com/index.php/2016/07/06/beware-this-scary-thing-Excel-can-do-to-your-data/) You can force R to handle the dates using the `as.Date(x)` function where you can specify the format.
 
 ```{r date_example, eval = FALSE}
 # A date variable
@@ -356,7 +413,7 @@ This function will take an object and return the class of it. Use the code chunk
 
   
 ### Vectors 
-Vectors are a list of values that are strung together. We can use these to hold a colection of numerical, or character data. For numeric values we have some built in functions to summerise them. These are very similar to using the formulas in excel to do calcuations over a range. A vector must contain data of the same type. 
+Vectors are a list of values that are strung together. We can use these to hold a colection of numerical, or character data. For numeric values we have some built in functions to summerise them. These are very similar to using the formulas in Excel to do calcuations over a range. A vector must contain data of the same type. 
 
 * `sum(x)` sums the total 
 * `length(x)` gets the number of values in the vectors
@@ -385,7 +442,7 @@ R's index is numbered similar to how Excel numbers its columns and rows, startin
 
 ### Data Frames
 
-In excel, we store our data in sheets. In R we can store our data in a few different data structures, the one we'll be focusing on today is a *Data Frame*. A data frame is like a table in Excel. Each column has a name much like in excel each column has a header. The Values within a column must share the same type. So if you have a bunch of numbers and some character in a column, that column will be treated as a character column, as charictar can contain both values, but numeric cannot. 
+In Excel, we store our data in sheets. In R we can store our data in a few different data structures, the one we'll be focusing on today is a *Data Frame*. A data frame is like a table in Excel. Each column has a name much like in Excel each column has a header. The Values within a column must share the same type. So if you have a bunch of numbers and some character in a column, that column will be treated as a character column, as charictar can contain both values, but numeric cannot. 
 
 Data Frames ([and latter tibbles](https://r4ds.had.co.nz/tibbles.html)) are central to maniuplating, analysing, and visualizing your data. When you import data into R from a .xlsx, or .csv file, you will get a resulting data frame. Sometimes however, you'll need to create a new data frame manually. The process for doing so is fairly simple.
 
@@ -447,3 +504,9 @@ To practice, select the courtelary fertility rate, and infant mortality rate fro
 swiss
 
 ```
+
+
+## Wrapping Up
+
+That's it for the first introduction to R! You've made it through, the next reccomended section is on data operations, which will teach you how to filter and transform your data, much like you used to in Excel.
+
