@@ -187,6 +187,34 @@ mtcars %>%
 
 ```
 
+
+The following is a table with Excel Formulas and their R equivelents. 
+
+
+| EXCEL   | R        |
+|:-------:|:--------:|
+| SUM     | sum()    |
+| AVERAGE | mean()   |
+| MEDIAN  | median() |
+| COUNTA  | length() |
+| MAX     | max()    |
+| MIN     | min()    |
+| STDEV   | sd()     |
+| ABS     | abs()    |
+| CEILING | ceiling()|
+| FLOOR   | floor()  |
+| ROUND   | round()  |
+| CONCATENATE | paste()|
+| UPPER   | toupper()|
+| LOWER   | tolower()|
+| LEN     | nchar()  |
+| ISNA    | is.na()  |
+| MATCH   | which()  |
+| RANK    | rank()   |
+| VLOOKUP | merge()  |
+
+As you can see a lot of what you use is still there in base R. This is a non exhaustive list and there is likely a way to do everything you want to do in excel, but in R. 
+
 ## The Basics of R
 
 ### The R Console
@@ -504,7 +532,7 @@ To practice, select the courtelary fertility rate, and infant mortality rate fro
 swiss
 
 ```
-
+### Functions
 
 ## Wrapping Up
 
